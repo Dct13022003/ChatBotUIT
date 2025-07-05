@@ -8,7 +8,11 @@ import { useChat } from "../hooks/use-chat";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { TypingIndicator } from "@/components/TypingIndicator";
-import { FolderIcon, ChatBubbleBottomCenterTextIcon, PlusCircleIcon } from "@heroicons/react/24/solid";
+import {
+  FolderIcon,
+  ChatBubbleBottomCenterTextIcon,
+  PlusCircleIcon,
+} from "@heroicons/react/24/solid";
 
 export const Chat = () => {
   const {
@@ -31,17 +35,9 @@ export const Chat = () => {
 
   const faqSuggestions = [
     language === "Tiếng Việt"
-      ? "Giới thiệu về thành phố Hồ Chí Minh."
-      : "Introduction to Ho Chi Minh City.",
-    language === "Tiếng Việt"
-      ? "Làm sao để đến được An Giang?"
-      : "How to get to An Giang?",
-    language === "Tiếng Việt"
-      ? "Ăn gì khi đến Bến Tre."
-      : "What to eat when visiting Ben Tre.",
-    language === "Tiếng Việt"
-      ? "Nên đi đâu tham quan ở cố đô Huế."
-      : "Where to visit in the ancient capital of Hue.",
+      ? "Trường Đại học Công nghệ Thông tin là gì?"
+      : "What is the University of Information Technology?",
+    language === "Tiếng Việt" ? "Xin chào" : "Hello",
   ];
 
   useEffect(() => {
@@ -99,23 +95,29 @@ export const Chat = () => {
         <div className="flex items-center gap-2">
           <ChatBubbleBottomCenterTextIcon className="w-10 h-10" />
           <h1 className="text-2xl font-bold" style={{ fontSize: "2rem" }}>
-            {language === "Tiếng Việt" ? "Chatbot Du lịch Việt Nam" : "Vietnam Travel Chatbot"}
+            {language === "Tiếng Việt"
+              ? "Chatbot Du lịch Việt Nam"
+              : "Vietnam Travel Chatbot"}
           </h1>
         </div>
         <div className="flex items-center gap-4">
-        <div className="flex items-center space-x-2">
-          <label className={`text-sm font-medium ${theme === "light" ? "text-black" : "text-white"}`}>
-            {language === "Tiếng Việt" ? "Chọn ngôn ngữ:" : "Choose language:"}
-          </label>
-          <select
-            value={language}
-            onChange={handleLanguageChange}
-            className={`p-2 rounded-2xl border ${theme === "light" ? "bg-white text-black border-gray-300" : "bg-gray-700 text-white border-gray-600"}`}
-          >
-            <option value="Tiếng Việt">Tiếng Việt</option>
-            <option value="English">English</option>
-          </select>
-        </div>
+          <div className="flex items-center space-x-2">
+            <label
+              className={`text-sm font-medium ${theme === "light" ? "text-black" : "text-white"}`}
+            >
+              {language === "Tiếng Việt"
+                ? "Chọn ngôn ngữ:"
+                : "Choose language:"}
+            </label>
+            <select
+              value={language}
+              onChange={handleLanguageChange}
+              className={`p-2 rounded-2xl border ${theme === "light" ? "bg-white text-black border-gray-300" : "bg-gray-700 text-white border-gray-600"}`}
+            >
+              <option value="Tiếng Việt">Tiếng Việt</option>
+              <option value="English">English</option>
+            </select>
+          </div>
 
           <ThemeSwitch theme={theme} toggleTheme={toggleTheme} />
           <UserButton />
@@ -130,7 +132,9 @@ export const Chat = () => {
           {messages.length === 0 ? (
             <div className="flex flex-col items-center space-y-4 mt-4">
               <p className="text-lg font-semibold">
-                {language === "Tiếng Việt" ? "Một vài câu hỏi thường gặp:" : "A few common questions:"}
+                {language === "Tiếng Việt"
+                  ? "Một vài câu hỏi thường gặp:"
+                  : "A few common questions:"}
               </p>
               <ul className="space-y-4">
                 {faqSuggestions.map((question, index) => (
@@ -170,14 +174,16 @@ export const Chat = () => {
                         __html: m.content
                           .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
                           .replace(/\n/g, "<br />")
-                          .replace(/###\s(.*?):/g, "<h3>$1:</h3>")
+                          .replace(/###\s(.*?):/g, "<h3>$1:</h3>"),
                       }}
                     ></p>
                   </div>
                 </li>
               ))}
               {isTyping && (
-                <li className={`text-left inline-flex items-start max-w-fit ${theme === "light" ? "bg-white text-black" : "bg-gray-900 text-white"}`}>
+                <li
+                  className={`text-left inline-flex items-start max-w-fit ${theme === "light" ? "bg-white text-black" : "bg-gray-900 text-white"}`}
+                >
                   <TypingIndicator />
                 </li>
               )}
@@ -194,7 +200,11 @@ export const Chat = () => {
         <div className="max-w-4xl mx-auto w-full flex items-center gap-4">
           <Input
             className={`flex-grow p-3 rounded-2xl ${theme === "light" ? "bg-white text-black" : "bg-gray-700 text-white"}`}
-            placeholder={language === "Tiếng Việt" ? "Nhập tin nhắn của bạn..." : "Type your message..."}
+            placeholder={
+              language === "Tiếng Việt"
+                ? "Nhập tin nhắn của bạn..."
+                : "Type your message..."
+            }
             value={input}
             onChange={handleInputChange}
           />
